@@ -1,5 +1,6 @@
 # coding=utf-8
 #处理图片
+#首次运行需要导入pip install Pillow和pip3 install numpy
 from PIL import Image
 #import cv2
 import  numpy as np
