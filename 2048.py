@@ -2,6 +2,7 @@
 
 import numpy,sys,random,pygame
 from pygame.locals import*
+#需要pygame， pip install pygame 
 
 Size = 5                                         #4*4行列
 Block_WH = 110                                    #每个块的长度宽度
