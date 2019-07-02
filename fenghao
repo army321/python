@@ -1,0 +1,81 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import os
+import time
+import datetime
+import configparser
+
+'''
+处理多次封号数据
+判断账号区服情况，然后插入到已有数据中
+#读取ini配置，筛选出多次封号源数据，筛选包含区服信息的数据
+'''
+
+serverName = ['南方一区,nf1_3321.sql','南方二区,nf2_3321.sql','南方三区,nf3_3321.sql','北方一区,bf1_3321.sql','北方二区,bf2_3321.sql','华东一区,sh1_3321.sql','华东二区,sh2_3306.sql','网龙联盟服,lmf_3306.sql','综合一区,zh1q_3306.sql','综合二区,zh2q_3306.sql'] 
+
+def write_log(log):
+	logfile = open('log.txt','a',encoding = 'utf-8')
+
+	t1=time.time()
+	time_local = time.localtime(t1)
+	t2=time.strftime("%Y-%m-%d %H:%M:%S",time_local)
+
+	logfile.write(t2+" : "+log+"\n")
+	logfile.close
+
+
+def read_ini():
+	try:
+		write_log('read ini start...')
+		config = configparser.ConfigParser()
+		config.read('fenghao.ini',encoding="utf-8")
+		source_path = config.get("fenghao","source_path")
+		source_file_name = config.get("fenghao","source_file_name")
+		script_path = config.get("fenghao","script_path")
+	except:
+		write_log('read ini error...')
+
+	read_txt(source_path,source_file_name,script_path)
+
+
+
+
+def read_txt(source_path,source_file_name,script_path):
+
+	write_log('read txt start...')
+	f = open(source_path+source_file_name ,'r',encoding = 'utf-8')
+	dataList1 = [] 
+	try:
+		for l in f:	
+			strlist = l.split(',')
+			if len(strlist) ==4:
+				dataList1.append(strlist)
+	except:
+		write_log(" open txt file error")
+
+	f.close
+	write_txt(dataList1,script_path)
+
+
+def write_txt(txt,script_path):
+	write_log('write sql start...')
+	datalist = txt
+	t1=time.time()
+	for i in serverName:
+		server_name_list = i.split(',')
+		f1 = open(script_path+server_name_list[1],'a',encoding = 'ansi')
+		for strlist in datalist:
+			if strlist[0]==server_name_list[0]:
+				for value in range(0,len(strlist)-3):
+					t2= int(t1) + 24*3600*30*int(strlist[value+3])
+					str1 = str("\n"+"delete from  `status` where owner_id = "+strlist[value+1]+" and status = 19 limit 5;")
+					str2 = str("\n"+"INSERT INTO `status`(`owner_id`,`status`,`power`,`sort`,`end_time`) VALUES ("+strlist[value+1]+",19,1,19,"+str(t2)+");")
+					f1.write(str1)
+					f1.write(str2)
+
+		f1.close
+
+if __name__ == '__main__': 
+	write_log("开始执行")
+	read_ini()
+	write_log('执行完成')
