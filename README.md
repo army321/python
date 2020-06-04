@@ -12,3 +12,9 @@ pip install pyinstaller
 
 pyinstaller -F D:\codes\dpython.py
 打包指定路径下的文件，生成的文件默认放在 C:\Users\Administrator\dist 下
+
+
+
+百度智能云
+文字识别 功能使用，创建一个app，可使用app相关内容进行调用。
+https://cloud.baidu.com/product/ocr/general
