@@ -18,3 +18,10 @@ pyinstaller -F D:\codes\dpython.py
 百度智能云
 文字识别 功能使用，创建一个app，可使用app相关内容进行调用。
 https://cloud.baidu.com/product/ocr/general
+
+
+Qt界面功能学习
+http://c.biancheng.net/view/3851.html  下载说明，下个安装包 
+pip 安装 pyqt5
+
+qt 设计好的界面，是.ui 格式的， 用pyuic5-o ui_Formhello.py formhello.ui  转成python可用格式， cmd 中执行，需要指定路径，如果路径不能改，就把文件放到默认路径下
