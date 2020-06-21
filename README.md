@@ -25,3 +25,6 @@ http://c.biancheng.net/view/3851.html  下载说明，下个安装包
 pip 安装 pyqt5
 
 qt 设计好的界面，是.ui 格式的， 用pyuic5-o ui_Formhello.py formhello.ui  转成python可用格式， cmd 中执行，需要指定路径，如果路径不能改，就把文件放到默认路径下
+
+
+MonoKai Pro vscode 界面插件，美化界面
