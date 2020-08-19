@@ -28,3 +28,8 @@ qt 设计好的界面，是.ui 格式的， 用pyuic5-o ui_Formhello.py formhell
 
 
 MonoKai Pro vscode 界面插件，美化界面
+
+插件的中文地址，下载速度快
+pip3 install -i https://pypi.douban.com/simple wxpython
+升级PIP
+python -m pip install --upgrade pip -i https://pypi.douban.com/simple
